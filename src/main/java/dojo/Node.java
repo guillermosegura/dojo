@@ -9,6 +9,7 @@ package dojo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * @author guillermo.segura@axity.com
@@ -55,16 +56,40 @@ public class Node
   {
     this.nodes = nodes;
   }
-  
+
   @Override
-  public String toString() {
-    
-    StringBuilder sb = new StringBuilder(this.name +":");
-    for(Node node : nodes) {
-      sb.append( node.getName());
+  public String toString()
+  {
+
+    StringBuilder sb = new StringBuilder( this.name + ":" );
+    for( Node node : nodes )
+    {
+      sb.append( node.getName() );
     }
-    
+
     return sb.toString();
+  }
+
+  @Override
+  public int hashCode()
+  {
+    return Objects.hash( this.name );
+  }
+
+  @Override
+  public boolean equals( Object object )
+  {
+    if( this == object )
+    {
+      return true;
+    }
+
+    if( object != null && object.getClass().equals( this.getClass() ) )
+    {
+      Node that = (Node) object;
+      return this.name.equals( that.name );
+    }
+    return false;
   }
 
 }
